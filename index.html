@@ -1,23 +1,28 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>商业洞察实验室</title>
+    <title>Shawn's World</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-color: #0f172a;
-            --card-bg: rgba(30, 41, 59, 0.7);
-            --card-border: rgba(148, 163, 184, 0.1);
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --accent-gradient: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
-            --hover-gradient: linear-gradient(135deg, #818cf8 0%, #c084fc 100%);
-            --glow: 0 0 80px rgba(99, 102, 241, 0.15);
+            /* Palette */
+            --bg-color: #050505;
+            --text-primary: #ffffff;
+            --text-secondary: #a3a3a3;
+            --accent-color: #ccff00;
+            /* Acid Lime */
+            --accent-hover: #b3e600;
+            --border-color: #262626;
+            --card-bg: #0a0a0a;
+
+            /* Spacing */
+            --container-width: 900px;
+            --header-height: 80px;
         }
 
         * {
@@ -27,208 +32,224 @@
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            font-family: 'Inter', sans-serif;
             background-color: var(--bg-color);
-            background-image:
-                radial-gradient(circle at 15% 50%, rgba(99, 102, 241, 0.08) 0%, transparent 25%),
-                radial-gradient(circle at 85% 30%, rgba(168, 85, 247, 0.08) 0%, transparent 25%);
             color: var(--text-primary);
-            min-height: 100vh;
-            padding: 60px 20px;
-            line-height: 1.6;
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
             overflow-x: hidden;
         }
 
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: color 0.2s ease;
+        }
+
+        /* Layout */
         .container {
-            max-width: 1000px;
+            max-width: var(--container-width);
             margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Header */
+        header {
+            height: var(--header-height);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            background: rgba(5, 5, 5, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+        }
+
+        .logo {
+            font-weight: 900;
+            font-size: 20px;
+            letter-spacing: -0.05em;
+            text-transform: uppercase;
+        }
+
+        .logo span {
+            color: var(--accent-color);
+        }
+
+        nav ul {
+            display: flex;
+            gap: 32px;
+            list-style: none;
+        }
+
+        nav a {
+            font-size: 14px;
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+
+        nav a:hover {
+            color: var(--text-primary);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
             position: relative;
-            z-index: 1;
         }
 
-        .header {
-            text-align: center;
-            margin-bottom: 80px;
-            animation: fadeInDown 0.8s ease-out;
+        .hero h1 {
+            font-size: clamp(48px, 8vw, 96px);
+            font-weight: 900;
+            line-height: 0.9;
+            letter-spacing: -0.04em;
+            margin-bottom: 24px;
+            text-transform: uppercase;
         }
 
-        .header h1 {
-            font-size: 56px;
-            font-weight: 800;
-            margin-bottom: 16px;
-            background: var(--accent-gradient);
-            background-clip: text;
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: -0.02em;
+        .hero h1 .highlight {
+            color: transparent;
+            -webkit-text-stroke: 2px var(--accent-color);
+            position: relative;
             display: inline-block;
         }
 
-        .header p {
+        .hero h1 .highlight::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 4px;
+            top: 4px;
+            color: var(--accent-color);
+            opacity: 0.5;
+            z-index: -1;
+            filter: blur(4px);
+        }
+
+        .hero p {
             font-size: 20px;
             color: var(--text-secondary);
-            font-weight: 400;
-            max-width: 600px;
-            margin: 0 auto;
+            max-width: 500px;
+            margin-bottom: 40px;
         }
 
-        .nav-grid {
+        /* Decorative Line */
+        .separator {
+            width: 100%;
+            height: 1px;
+            background: linear-gradient(90deg, var(--accent-color), transparent);
+            margin-bottom: 80px;
+            opacity: 0.5;
+        }
+
+        /* Blog List */
+        .section-title {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent-color);
+            margin-bottom: 40px;
+            font-weight: 600;
+        }
+
+        .blog-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 30px;
-            animation: fadeInUp 0.8s ease-out 0.2s backwards;
+            gap: 40px;
         }
 
-        .nav-card {
+        .blog-card {
+            display: block;
+            padding: 32px;
             background: var(--card-bg);
-            border: 1px solid var(--card-border);
-            border-radius: 24px;
-            padding: 40px;
-            text-decoration: none;
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--border-color);
+            border-radius: 4px;
+            /* Brutalist sharp corners or slight round */
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            display: flex;
-            flex-direction: column;
         }
 
-        .nav-card:hover {
-            transform: translateY(-5px) scale(1.01);
-            border-color: rgba(148, 163, 184, 0.3);
-            box-shadow: 0 20px 40px -10px rgba(0, 0, 0, 0.3);
+        .blog-card:hover {
+            transform: translateY(-4px);
+            border-color: var(--accent-color);
+            box-shadow: 0 10px 30px -10px rgba(204, 255, 0, 0.1);
         }
 
-        .nav-card::before {
+        .blog-card::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
-            right: 0;
+            width: 4px;
             height: 100%;
-            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y), rgba(255, 255, 255, 0.06), transparent 40%);
-            opacity: 0;
-            transition: opacity 0.5s;
-            pointer-events: none;
-            z-index: 1;
+            background: var(--accent-color);
+            transform: scaleY(0);
+            transition: transform 0.3s ease;
+            transform-origin: bottom;
         }
 
-        .nav-card:hover::before {
-            opacity: 1;
+        .blog-card:hover::before {
+            transform: scaleY(1);
         }
 
-        .nav-card-icon {
-            width: 64px;
-            height: 64px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 32px;
-            margin-bottom: 24px;
-            transition: transform 0.4s ease;
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .nav-card:hover .nav-card-icon {
-            transform: scale(1.1) rotate(5deg);
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .nav-card h2 {
-            font-size: 24px;
-            color: var(--text-primary);
+        .blog-meta {
+            font-size: 12px;
+            color: var(--text-secondary);
             margin-bottom: 12px;
-            font-weight: 700;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
         }
 
-        .nav-card p {
+        .blog-tag {
+            border: 1px solid var(--border-color);
+            padding: 2px 8px;
+            border-radius: 100px;
+        }
+
+        .blog-card h2 {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            letter-spacing: -0.02em;
+        }
+
+        .blog-card p {
             color: var(--text-secondary);
             font-size: 16px;
             line-height: 1.6;
-            margin-bottom: 24px;
-            flex-grow: 1;
         }
 
-        .nav-card-tags {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-
-        .tag {
-            background: rgba(99, 102, 241, 0.1);
-            color: #818cf8;
-            padding: 6px 14px;
-            border-radius: 100px;
-            font-size: 13px;
-            font-weight: 500;
-            border: 1px solid rgba(99, 102, 241, 0.2);
-            transition: all 0.3s ease;
-        }
-
-        .nav-card:hover .tag {
-            background: rgba(99, 102, 241, 0.2);
-            border-color: rgba(99, 102, 241, 0.4);
-        }
-
-        .arrow {
-            opacity: 0;
-            transform: translateX(-10px);
-            transition: all 0.3s ease;
-            color: #a855f7;
-        }
-
-        .nav-card:hover .arrow {
-            opacity: 1;
-            transform: translateX(0);
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 100px;
-            padding-top: 40px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        /* Footer */
+        footer {
+            margin-top: 120px;
+            padding: 40px 0;
+            border-top: 1px solid var(--border-color);
             color: var(--text-secondary);
             font-size: 14px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        @keyframes fadeInDown {
-            from {
-                opacity: 0;
-                transform: translateY(-20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .social-links {
+            display: flex;
+            gap: 20px;
         }
 
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(20px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        .social-links a:hover {
+            color: var(--accent-color);
         }
 
+        /* Mobile */
         @media (max-width: 768px) {
-            .header h1 {
-                font-size: 42px;
+            .hero h1 {
+                font-size: 48px;
             }
 
-            .nav-card {
-                padding: 30px;
+            .blog-card {
+                padding: 24px;
             }
         }
     </style>
@@ -236,41 +257,55 @@
 
 <body>
     <div class="container">
-        <div class="header">
-            <h1>商业洞察实验室</h1>
-            <p>交互式解析商业逻辑，可视化驱动业务决策</p>
-        </div>
+        <header>
+            <a href="#" class="logo">Shawn<span>.</span></a>
+            <nav>
+                <ul>
+                    <li><a href="#">Thoughts</a></li>
+                    <li><a href="#">Projects</a></li>
+                    <li><a href="#">About</a></li>
+                </ul>
+            </nav>
+        </header>
 
-        <div class="nav-grid">
-            <a href="roi2/" class="nav-card" id="card1">
-                <div class="nav-card-icon">📊</div>
-                <h2>ROI2 分析工具 <span class="arrow">→</span></h2>
-                <p>交互式的 ROI2 与销售费用率敏感度分析可视化工具，帮助业务团队直观理解关键指标变化。</p>
-                <div class="nav-card-tags">
-                    <span class="tag">数据分析</span>
-                    <span class="tag">可视化</span>
-                    <span class="tag">业务工具</span>
-                </div>
-            </a>
-        </div>
+        <section class="hero">
+            <h1>
+                Think Different,<br>
+                <span class="highlight" data-text="THEN THINK BIG">THEN THINK BIG</span>
+            </h1>
+            <p>Exploring the intersection of technical depth and business logic. Building tools that matter.</p>
+        </section>
 
-        <div class="footer">
-            <p>© 2024 Shawn's Website. 更多精彩即将呈现...</p>
-        </div>
+        <div class="separator"></div>
+
+        <main>
+            <div class="section-title">Latest Thoughts</div>
+
+            <div class="blog-grid">
+                <!-- Article 1 -->
+                <a href="roi2/" class="blog-card">
+                    <div class="blog-meta">
+                        <span>Nov 24, 2025</span>
+                        <span class="blog-tag">Analytics</span>
+                    </div>
+                    <h2>ROI2 & Sales Sensitivity Analysis</h2>
+                    <p>An interactive visualization tool to understand the relationship between Return on Investment and
+                        sales expense ratios. Dive into the data.</p>
+                </a>
+
+
+            </div>
+        </main>
+
+        <footer>
+            <div>© 2024 Shawn. All rights reserved.</div>
+            <div class="social-links">
+                <a href="#">Twitter</a>
+                <a href="#">GitHub</a>
+                <a href="#">Email</a>
+            </div>
+        </footer>
     </div>
-
-    <script>
-        // Add mouse move effect for cards
-        document.querySelectorAll('.nav-card').forEach(card => {
-            card.addEventListener('mousemove', e => {
-                const rect = card.getBoundingClientRect();
-                const x = e.clientX - rect.left;
-                const y = e.clientY - rect.top;
-                card.style.setProperty('--mouse-x', `${x}px`);
-                card.style.setProperty('--mouse-y', `${y}px`);
-            });
-        });
-    </script>
 </body>
 
 </html>
